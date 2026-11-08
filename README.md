@@ -28,7 +28,8 @@ OS name: "linux", version: "6.18.54.1-microsoft-standard-wsl2", arch: "amd64", f
 
 ## B — Бүрэн хамралт
 
-Нийт 20 тест амжилттай ажилласан. `results/jacoco-B.csv`-д LINE_MISSED = 0, LINE_COVERED = 25, BRANCH_MISSED = 0, BRANCH_COVERED = 41 байна. Line болон Branch хамралт хоёул 100% хүрсэн.
+Нийт 20 тест амжилттай ажилласан. `results/jacoco-B.csv`-д LINE_MISSED = 0, LINE_COVERED = 25, BRANCH_MISSED = 0, BRANCH_COVERED = 41 байна. Line болон Branch хамралт хоёул 100% хүрсэн. 
+![scholarship() функцийн гар зураг ба ирмэгийн тестийн тайлбар](cfg.png)
 
 ## C — Давталтын зааг
 
@@ -37,3 +38,15 @@ OS name: "linux", version: "6.18.54.1-microsoft-standard-wsl2", arch: "amd64", f
 - 2+ дүн: `[95, 85, 75, 65]` оролтын голч `2.5` байхыг шалгасан.
 
 Салааны хамралт давталт яг хэдэн удаа ажилласныг харуулдаггүй. Эдгээр тест нь хоосон оролтыг зөв хориглох, нэг болон олон дүнгийн голчийг зөв тооцохыг тусад нь батална.
+
+## D — Зааг утгын алдаа
+
+Засварын өмнөх [тестийн гаралт](results/mvn-test-D-fail.txt): 29 тестээс 1 унасан, Maven exit code `1`. `ScholarshipBoundaryTest.letterGrade_atBoundary_returnsSpecifiedGrade` тестийн `60` онооны хувилбар `expected: <D> but was: <F>` гэж унасан.
+
+Засварын commit: `9d1533f`. `score > 60` нөхцөлийг `score >= 60` болгосон.
+
+[Эцсийн тестийн гаралт](results/mvn-verify-final.txt): 29 тест, 0 failures, 0 errors, 0 skipped, `BUILD SUCCESS`. [Эцсийн JaCoCo CSV](results/jacoco-final.csv)-д `LINE_MISSED = 0`, `BRANCH_MISSED = 0`; Line 25/25, Branch 41/41 буюу хоёул 100%.
+
+100% салааны хамралттай байсан ч өмнөх тестүүд яг 60 оноог шалгаагүй. `score > 60` болон `score >= 60` нөхцөлүүд хоёулаа үнэн, худал гэсэн хоёр салаатай. 60-аас их, бага утгаар хоёр салааг хамруулж болох ч яг 60 дээрх зөрүү илрэхгүй. Хамралт нь кодын аль хэсэг ажилласныг хэмждэг. Харин үр дүн шаардлагад нийцэж буйг зааг утгын тестийн assertion шалгана.
+
+AI туслахаас тестийн жишээ, CFG-ийн загвар, README-ийн найруулгад тусламж авсан. Тестүүдийг өөрийн орчинд ажиллуулж, CFG-г гараар зурсан.
